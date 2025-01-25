@@ -48,7 +48,14 @@ public class Chloe {
         taskList.add(task);
     }
 
-
+    public static void listTasks() {
+        System.out.println(LINE);
+        System.out.println("\t your things to do aree: ");
+        for(int i = 0; i < taskList.size(); i++) {
+            System.out.println("\t Thing "+(i+1)+". "+taskList.get(i));
+        }
+        System.out.println(LINE);
+    }
 
     /**
      * The main method serves as the entry point of the program.
@@ -71,7 +78,7 @@ public class Chloe {
                 isRunning = false;
                 break;
             case "list":
-                //listTasks(); //TODO: finish
+                listTasks();
                 break;
             default:
                 addTask(userEntry);

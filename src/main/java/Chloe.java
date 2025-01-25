@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * The {@code Chloe} class is a simple interactive program where Chloe
@@ -6,8 +6,10 @@ import java.util.Scanner;
  * The program runs until the user types "bye".
  */
 public class Chloe {
-    static boolean isRunning = true;
-    static final String LINE = "\t**********************************************";
+    // Line used when printing replies
+    private static final String LINE = "\t**********************************************";
+    private static boolean isRunning = true; // Flag to keep program running
+    private static List<String> taskList = new ArrayList<>(); // List of tasks
 
     /**
      * Displays a greeting message from Chloe.
@@ -33,6 +35,22 @@ public class Chloe {
     }
 
     /**
+     * Reads in task from the user.
+     * Echoes the task string and adds to the list.
+     * */
+    public static void addTask(String task) {
+        // Echo the command back to the user
+        System.out.println(LINE);
+        System.out.println("\t added "+task+" for youu <3");
+        System.out.println(LINE);
+
+        // Adds task to the list
+        taskList.add(task);
+    }
+
+
+
+    /**
      * The main method serves as the entry point of the program.
      * It greets the user, enters an interactive loop to read commands
      * from the console, and exits when the user types "bye".
@@ -45,16 +63,18 @@ public class Chloe {
         // Interactive loop
         while (isRunning) {
             Scanner scanner = new Scanner(System.in);
-            String command = scanner.nextLine();
+            String userEntry = scanner.nextLine();
 
             // Exit the program when "bye" is typed
-            if (command.equals("bye")) {
+            switch(userEntry.toLowerCase()) {
+            case "bye":
                 isRunning = false;
-            } else {
-                // Echo the command back to the user
-                System.out.println(LINE);
-                System.out.println("\t"+command);
-                System.out.println(LINE);
+                break;
+            case "list":
+                //listTasks(); //TODO: finish
+                break;
+            default:
+                addTask(userEntry);
             }
         }
 

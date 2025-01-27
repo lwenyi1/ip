@@ -9,7 +9,7 @@ public class Chloe {
     // Line used when printing replies
     private static final String LINE = "\t**********************************************";
     private static boolean isRunning = true; // Flag to keep program running
-    private static List<String> taskList = new ArrayList<>(); // List of tasks
+    private static List<Task> taskList = new ArrayList<>(); // List of tasks
 
     /**
      * Displays a greeting message from Chloe.
@@ -45,14 +45,21 @@ public class Chloe {
         System.out.println(LINE);
 
         // Adds task to the list
-        taskList.add(task);
+        Task newTask = new Task(task);
+        taskList.add(newTask);
     }
 
+    /**
+     * Lists the tasks stored thus far.
+     * Prints out the tasks line by line.
+     * */
     public static void listTasks() {
         System.out.println(LINE);
         System.out.println("\t your things to do aree: ");
         for(int i = 0; i < taskList.size(); i++) {
-            System.out.println("\t Thing "+(i+1)+". "+taskList.get(i));
+            Task task = taskList.get(i);
+            System.out.println("\t Thing "+(i+1)+". "+task.taskDescription
+                                +" ["+task.getStatusIcon()+"]");
         }
         System.out.println(LINE);
     }
@@ -69,12 +76,18 @@ public class Chloe {
 
         // Interactive loop
         while (isRunning) {
+            // Read user entries
             Scanner scanner = new Scanner(System.in);
             String userEntry = scanner.nextLine();
+            String[] stringParts = userEntry.split(" ", 2);
+            String userCommand = stringParts[0];
+            String entryRemainder = stringParts.length > 1? stringParts[1] : "";
 
-            // Exit the program when "bye" is typed
+            // NOTE: using switch statement cos at some point it would be better
+            // to have an "add" command instead of just taking in everything IMO
             switch(userEntry.toLowerCase()) {
-            case "bye":
+                // This should be userCommand at some pt
+            case "bye": // Exit the program when "bye" is typed
                 isRunning = false;
                 break;
             case "list":

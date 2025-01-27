@@ -41,7 +41,7 @@ public class Chloe {
     public static void addTask(String task) {
         // Echo the command back to the user
         System.out.println(LINE);
-        System.out.println("\t added "+task+" for youu <3");
+        System.out.println("\tadded "+task+" for youu <3");
         System.out.println(LINE);
 
         // Adds task to the list
@@ -55,12 +55,42 @@ public class Chloe {
      * */
     public static void listTasks() {
         System.out.println(LINE);
-        System.out.println("\t your things to do aree: ");
+        System.out.println("\tyour things to do aree: ");
         for(int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             System.out.println("\t Thing "+(i+1)+". "+task.taskDescription
                                 +" ["+task.getStatusIcon()+"]");
         }
+        System.out.println(LINE);
+    }
+
+    /**
+     * Marks task as done.
+     * Updates the task status and informs user.
+     * */
+    public static void markTask(int taskId) {
+        Task task = taskList.get(taskId);
+        task.updateStatus(true);
+        System.out.println(LINE);
+        System.out.println("\tYAY marked "+task.getTaskDescription()
+                            +" as done for you <3");
+        System.out.println("\t Thing "+(taskId+1)+". "+task.taskDescription
+                +" ["+task.getStatusIcon()+"]");
+        System.out.println(LINE);
+    }
+
+    /**
+     * Unmarks task as done.
+     * Updates the task status and informs user.
+     * */
+    public static void unmarkTask(int taskId) {
+        Task task = taskList.get(taskId);
+        task.updateStatus(false);
+        System.out.println(LINE);
+        System.out.println("\tHUH "+task.getTaskDescription()
+                +" is not done? Unmarked :(");
+        System.out.println("\t Thing "+(taskId+1)+". "+task.taskDescription
+                +" ["+task.getStatusIcon()+"]");
         System.out.println(LINE);
     }
 
@@ -79,12 +109,12 @@ public class Chloe {
             // Read user entries
             Scanner scanner = new Scanner(System.in);
             String userEntry = scanner.nextLine();
-            String[] stringParts = userEntry.split(" ", 2);
-            String userCommand = stringParts[0];
-            String entryRemainder = stringParts.length > 1? stringParts[1] : "";
 
-            // NOTE: using switch statement cos at some point it would be better
-            // to have an "add" command instead of just taking in everything IMO
+            // TODO: Implement different commands
+            //String[] stringParts = userEntry.split(" ", 2);
+            //String userCommand = stringParts[0];
+            //String entryRemainder = stringParts.length > 1? stringParts[1] : "";
+
             switch(userEntry.toLowerCase()) {
                 // This should be userCommand at some pt
             case "bye": // Exit the program when "bye" is typed
@@ -94,7 +124,20 @@ public class Chloe {
                 listTasks();
                 break;
             default:
-                addTask(userEntry);
+                String[] stringParts = userEntry.split(" ", 2);
+                String userCommand = stringParts[0];
+                // TODO: Handle lousy user entries
+                if (userCommand.equals("mark")) {
+                    int taskId = stringParts.length > 1 ?
+                            (Integer.parseInt(stringParts[1])-1) : -1;
+                    markTask(taskId);
+                } else if (userCommand.equals("unmark")) {
+                    int taskId = stringParts.length > 1 ?
+                            (Integer.parseInt(stringParts[1])-1) : -1;
+                    unmarkTask(taskId);
+                } else {
+                    addTask(userEntry);
+                }
             }
         }
 

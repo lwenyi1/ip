@@ -7,7 +7,15 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "✓" : " ");
+    }
+
+    public void updateStatus(boolean isMarked) {
+        isDone = isMarked;
     }
 }

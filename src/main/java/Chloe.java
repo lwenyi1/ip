@@ -35,14 +35,20 @@ public class Chloe {
     }
 
     /**
-     * Reads in task from the user.
-     * Echoes the task string and adds to the list.
+     * Prints message asking user for valid command.
+     * */
+    public static void handleBadCommand() {
+        System.out.println(LINE);
+        System.out.println("\tI'm sorry I don't know what you mean!!");
+        System.out.println("\tEnter a valid command please :\")");
+        System.out.println(LINE);
+    }
+
+    /**
+     * Reads in task from the user and adds it to the task list.
      * */
     public static void addTask(String task) {
-        // Echo the command back to the user
-        System.out.println(LINE);
-        System.out.println("\tadded "+task+" for youu <3");
-        System.out.println(LINE);
+
 
         // Adds task to the list
         Task newTask = new Task(task);
@@ -110,34 +116,34 @@ public class Chloe {
             Scanner scanner = new Scanner(System.in);
             String userEntry = scanner.nextLine();
 
-            // TODO: Implement different commands
-            //String[] stringParts = userEntry.split(" ", 2);
-            //String userCommand = stringParts[0];
-            //String entryRemainder = stringParts.length > 1? stringParts[1] : "";
+            // Implement different commands
+            String[] stringParts = userEntry.split(" ", 2);
+            String userCommand = stringParts[0];
+            String entryRemainder = stringParts.length > 1? stringParts[1] : "";
 
-            switch(userEntry.toLowerCase()) {
-                // This should be userCommand at some pt
+            // Handle commands
+            switch(userCommand.toLowerCase()) {
             case "bye": // Exit the program when "bye" is typed
                 isRunning = false;
                 break;
             case "list":
                 listTasks();
                 break;
+            case "todo":
+            case "deadline":
+            case "event":
+            case "mark":
+                int markTaskId = stringParts.length > 1 ?
+                        (Integer.parseInt(stringParts[1])-1) : -1;
+                markTask(markTaskId);
+                break;
+            case "unmark":
+                int unmarkTaskId = stringParts.length > 1 ?
+                        (Integer.parseInt(stringParts[1])-1) : -1;
+                unmarkTask(unmarkTaskId);
+                break;
             default:
-                String[] stringParts = userEntry.split(" ", 2);
-                String userCommand = stringParts[0];
-                // TODO: Handle lousy user entries
-                if (userCommand.equals("mark")) {
-                    int taskId = stringParts.length > 1 ?
-                            (Integer.parseInt(stringParts[1])-1) : -1;
-                    markTask(taskId);
-                } else if (userCommand.equals("unmark")) {
-                    int taskId = stringParts.length > 1 ?
-                            (Integer.parseInt(stringParts[1])-1) : -1;
-                    unmarkTask(taskId);
-                } else {
-                    addTask(userEntry);
-                }
+                handleBadCommand();
             }
         }
 

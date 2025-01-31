@@ -17,7 +17,7 @@ public class Deadline extends Task {
 
     @Override
     public String getTaskType() {
-        return "(Deadline)";
+        return "[D]";
     }
 
     public String getDueDate() {

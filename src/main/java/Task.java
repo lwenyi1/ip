@@ -17,7 +17,7 @@ public class Task {
     }
 
     public String getTaskType() {
-        return "(Todo)"; // Default type
+        return "[T]"; // Default type
     }
 
     public String getTaskDescription() {
@@ -25,7 +25,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[✓] " : "[ ] ");
+        return (isDone ? "[✓]" : "[ ]");
     }
 
     public void updateStatus(boolean isMarked) {

@@ -48,11 +48,25 @@ public class Chloe {
      * Reads in task from the user and adds it to the task list.
      * */
     public static void addTask(String task) {
-
-
         // Adds task to the list
         Task newTask = new Task(task);
+        newTask.printTaskAddition();
         taskList.add(newTask);
+    }
+
+    /**
+     * Reads in deadline from the user and adds it to the task list.
+     * */
+    public static void addDeadline(String task) {
+        // Split task name and due date
+        String[] stringParts = task.split(" /by ", 2);
+        String taskDescription = stringParts[0];
+        String dueDate = stringParts.length > 1? stringParts[1] : "";
+
+        // Adds task to the list
+        Deadline newDeadline = new Deadline(taskDescription, dueDate);
+        newDeadline.printTaskAddition();
+        taskList.add(newDeadline);
     }
 
     /**
@@ -64,8 +78,8 @@ public class Chloe {
         System.out.println("\tyour things to do aree: ");
         for(int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            System.out.println("\t Thing "+(i+1)+". "+task.taskDescription
-                                +" ["+task.getStatusIcon()+"]");
+            System.out.println("\t"+task.getStatusIcon() + "Thing "+(i+1)+". "
+                    + task.getTaskType() + " "+task.toString());
         }
         System.out.println(LINE);
     }
@@ -78,10 +92,10 @@ public class Chloe {
         Task task = taskList.get(taskId);
         task.updateStatus(true);
         System.out.println(LINE);
-        System.out.println("\tYAY marked "+task.getTaskDescription()
-                            +" as done for you <3");
-        System.out.println("\t Thing "+(taskId+1)+". "+task.taskDescription
-                +" ["+task.getStatusIcon()+"]");
+        System.out.println("\tYAY marked \""+task.getTaskDescription()
+                            +"\" as done for you <3");
+        System.out.println("\t"+task.getStatusIcon() + "Thing "+(taskId+1)+". "
+                + task.getTaskType() + " "+task.toString());
         System.out.println(LINE);
     }
 
@@ -93,10 +107,10 @@ public class Chloe {
         Task task = taskList.get(taskId);
         task.updateStatus(false);
         System.out.println(LINE);
-        System.out.println("\tHUH "+task.getTaskDescription()
-                +" is not done? Unmarked :(");
-        System.out.println("\t Thing "+(taskId+1)+". "+task.taskDescription
-                +" ["+task.getStatusIcon()+"]");
+        System.out.println("\tHUH \""+task.getTaskDescription()
+                +"\" is not done? Unmarked :(");
+        System.out.println("\t"+task.getStatusIcon() + "Thing "+(taskId+1)+". "
+                + task.getTaskType() + " "+task.toString());
         System.out.println(LINE);
     }
 
@@ -130,8 +144,13 @@ public class Chloe {
                 listTasks();
                 break;
             case "todo":
+                addTask(entryRemainder);
+                break;
             case "deadline":
+                addDeadline(entryRemainder);
+                break;
             case "event":
+                break;
             case "mark":
                 int markTaskId = stringParts.length > 1 ?
                         (Integer.parseInt(stringParts[1])-1) : -1;

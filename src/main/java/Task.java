@@ -1,20 +1,23 @@
 public class Task {
     protected String taskDescription;
     protected boolean isDone;
-    private static final String LINE = "\t**********************************************";
+    protected static final String LINE = "\t**********************************************";
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.isDone = false;
 
+    }
+
+    public void printTaskAddition() {
         // Echo the command back to the user
         System.out.println(LINE);
-        System.out.println("\tAdded \""+taskDescription+"\" for youu <3");
+        System.out.println("\tAdded \""+getTaskDescription()+"\" for youu <3");
         System.out.println(LINE);
     }
 
     public String getTaskType() {
-        return "[T]"; // T for Task
+        return "(Todo)"; // Default type
     }
 
     public String getTaskDescription() {
@@ -22,10 +25,14 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : " ");
+        return (isDone ? "[✓] " : "[ ] ");
     }
 
     public void updateStatus(boolean isMarked) {
         isDone = isMarked;
+    }
+
+    public String toString() {
+        return taskDescription;
     }
 }

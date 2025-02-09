@@ -2,6 +2,8 @@ package chloe;
 
 import java.util.*;
 
+import chloe.tasktypes.*;
+
 public class TaskManager {
     private static final String LINE = "\t**********************************************";
     private static List<Task> taskList = new ArrayList<>(); // List of tasks

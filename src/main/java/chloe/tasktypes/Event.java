@@ -1,4 +1,4 @@
-package chloe;
+package chloe.tasktypes;
 
 public class Event extends Task{
     protected String from;

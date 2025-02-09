@@ -1,30 +1,50 @@
-# chloe.chloe User Guide
+# Chloe User Guide
 
-// Update the title above to match the actual product name
+## Introduction
+Chloe is a simple interactive task manager that helps you keep track of your tasks, deadlines, and events efficiently.
 
-// Product screenshot goes here
+## Adding Todos
+To add a **todo**, use the `todo` command followed by the task description.
 
-// Product intro goes here
-
-## Adding deadlines
-
-// Describe the action and its outcome.
-
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
-
+### Example:
 ```
-expected output
+todo Buy groceries
 ```
 
-## Feature ABC
+### Expected Outcome:
+```
+**********************************************
+Added: [ ][T] Buy groceries
+**********************************************
+```
 
-// Feature details
+## Adding Deadlines
+To add a **deadline**, use the `deadline` command followed by the task description and the due date/time, separated by `/by`.
 
+### Example:
+```
+deadline Submit assignment /by Monday 9pm
+```
 
-## Feature XYZ
+### Expected Outcome:
+```
+**********************************************
+Added: [ ][D] Submit assignment (by: Monday 9pm)
+**********************************************
+```
 
-// Feature details
+## Adding Events
+To add an **event**, use the `event` command followed by the event description, start time (`/from`), and end time (`/to`).
+
+### Example:
+```
+event Team meeting /from Friday 2pm /to 4pm
+```
+
+### Expected Outcome:
+```
+**********************************************
+Added: [ ][E] Team meeting (from: Friday 2pm to: 4pm)
+**********************************************
+```
+

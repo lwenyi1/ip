@@ -1,3 +1,5 @@
+package chloe.exceptions;
+
 public class IncompleteCommandException extends Exception{
     private final String message;
 

@@ -1,4 +1,9 @@
+package chloe;
+
 import java.util.*;
+
+import chloe.exceptions.*;
+import chloe.tasktypes.*;
 
 public class TaskManager {
     private static final String LINE = "\t**********************************************";

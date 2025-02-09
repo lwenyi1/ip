@@ -1,3 +1,5 @@
+package chloe.tasktypes;
+
 public class Task {
     protected String taskDescription;
     protected boolean isDone;

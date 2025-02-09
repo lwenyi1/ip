@@ -11,27 +11,34 @@ public class TaskManager {
         String taskDetails = stringParts.length > 1? stringParts[1] : "";
 
         // Handle commands
-        switch(userCommand.toLowerCase()) {
-        case "bye": // Exit the program when "bye" is typed
-            return false;
-        case "list":
-            listTasks();
-            break;
-        case "todo":
-            addTodo(taskDetails);
-            break;
-        case "deadline":
-            addDeadline(taskDetails);
-            break;
-        case "event":
-            addEvent(taskDetails);
-            break;
-        case "mark":
-        case "unmark":
-            handleTaskMarking(userCommand.toLowerCase(), stringParts);
-            break;
-        default:
+        try {
+            switch (userCommand.toLowerCase()) {
+            case "bye": // Exit the program when "bye" is typed
+                return false;
+            case "list":
+                listTasks();
+                break;
+            case "todo":
+                addTodo(taskDetails);
+                break;
+            case "deadline":
+                addDeadline(taskDetails);
+                break;
+            case "event":
+                addEvent(taskDetails);
+                break;
+            case "mark":
+            case "unmark":
+                handleTaskMarking(userCommand.toLowerCase(), stringParts);
+                break;
+            default:
+                throw new IllegalCommandException();
+            }
+        } catch (IllegalCommandException e) {
             handleBadCommand();
+        } catch (IncompleteCommandException e) {
+            String message = e.getMessage();
+            handleIncompleteCommand(message);
         }
 
         return true;
@@ -49,15 +56,21 @@ public class TaskManager {
     }
 
     /**
+     * Prints message asking user for valid command.
+     * */
+    public static void handleIncompleteCommand(String message) {
+        System.out.println(LINE);
+        System.out.println("\t" + message);
+        System.out.println(LINE);
+    }
+
+    /**
      * Reads in task from the user and adds it to the task list.
      * */
-    public static void addTodo(String task) {
+    public static void addTodo(String task) throws IncompleteCommandException {
         // Adds task to the list
         if (task.isEmpty()) {
-            System.out.println(LINE);
-            System.out.println("\tPlease use the format: todo <description>");
-            System.out.println(LINE);
-            return;
+            throw new IncompleteCommandException("Please use the format: todo <description>");
         }
 
         Task newTask = new Task(task);
@@ -68,17 +81,14 @@ public class TaskManager {
     /**
      * Reads in deadline from the user and adds it to the task list.
      * */
-    public static void addDeadline(String task) {
+    public static void addDeadline(String task) throws IncompleteCommandException {
         // Split task name and due date
         String[] stringParts = task.split(" /by ", 2);
         String taskDescription = stringParts[0];
         String dueDate = stringParts.length > 1? stringParts[1] : "";
 
         if (taskDescription.isEmpty() || dueDate.isEmpty()) {
-            System.out.println(LINE);
-            System.out.println("\tPlease use the format: deadline <description> /by <due date>");
-            System.out.println(LINE);
-            return;
+            throw new IncompleteCommandException("Please use the format: deadline <description> /by <due date>");
         }
 
         // Adds deadline to the list
@@ -90,7 +100,7 @@ public class TaskManager {
     /**
      * Reads in event from the user and adds it to the task list.
      * */
-    public static void addEvent(String task) {
+    public static void addEvent(String task) throws IncompleteCommandException {
         // Split task name and due date
         String[] stringParts = task.split(" /from ", 2);
         String taskDescription = stringParts[0];
@@ -100,11 +110,8 @@ public class TaskManager {
         String to = timeParts.length > 1? timeParts[1] : "";
 
         if (taskDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
-            System.out.println(LINE);
-            System.out.println("\tPlease use the format: event <description> /from <date/time>" +
-                    " /to <end date/time>");
-            System.out.println(LINE);
-            return;
+            throw new IncompleteCommandException("Please use the format: event <description> /from <date/time>"
+                    + " /to <end date/time>");
         }
 
         // Adds event to the list

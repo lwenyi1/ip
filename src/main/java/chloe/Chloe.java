@@ -1,7 +1,9 @@
+package chloe;
+
 import java.util.*;
 
 /**
- * The {@code Chloe} class is a simple interactive program where Chloe
+ * The {@code Chloe} class is a simple interactive program where Chloe.Chloe
  * greets the user, responds to commands, and says goodbye upon exiting.
  * The program runs until the user types "bye".
  */
@@ -48,7 +50,7 @@ public class Chloe {
     }
 
     /**
-     * Displays a goodbye message from Chloe.
+     * Displays a goodbye message from Chloe.Chloe.
      * This method prints a decorative line, a farewell message,
      * and another decorative line.
      */

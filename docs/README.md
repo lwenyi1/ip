@@ -1,4 +1,4 @@
-# Chloe User Guide
+# chloe.chloe User Guide
 
 // Update the title above to match the actual product name
 

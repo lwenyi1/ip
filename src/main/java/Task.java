@@ -12,7 +12,7 @@ public class Task {
     public void printTaskAddition() {
         // Echo the command back to the user
         System.out.println(LINE);
-        System.out.println("\tAdded \""+getTaskDescription()+"\" for youu <3");
+        System.out.println("\tAdded \""+getTaskDescription()+"\" for you!");
         System.out.println(LINE);
     }
 

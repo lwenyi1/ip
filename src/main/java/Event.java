@@ -13,7 +13,7 @@ public class Event extends Task{
         // Echo the command back to the user
         System.out.println(LINE);
         System.out.println("\tAdded \"" + getTaskDescription()
-                + "\", happening on " + from + " to " + to + "<3");
+                + "\", happening on " + from + " to " + to + "!");
         System.out.println(LINE);
     }
 

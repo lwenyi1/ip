@@ -10,8 +10,8 @@ public class Deadline extends Task {
     public void printTaskAddition() {
         // Echo the command back to the user
         System.out.println(LINE);
-        System.out.println("\tAdded \"" + getTaskDescription() + "\" for you <3, do it by: "
-                + getDueDate() +"!!");
+        System.out.println("\tAdded \"" + getTaskDescription() + "\" for you, do it by: "
+                + getDueDate() +"!");
         System.out.println(LINE);
     }
 

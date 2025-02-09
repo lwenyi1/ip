@@ -1,7 +1,31 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+	**********************************************
+	Hi! I'm Chloe!
+	How can I help you today?
+	**********************************************
+	**********************************************
+	Added "Liu Wenyi: Answer CS2113 tutorial questions" for you!
+	**********************************************
+	**********************************************
+	Added "weekly CS2113 quiz" for you, do it by: Monday 9pm!
+	**********************************************
+	**********************************************
+	you have 2 things in your list:
+	[ ][T]1. Liu Wenyi: Answer CS2113 tutorial questions
+	[ ][D]2. weekly CS2113 quiz (by: Monday 9pm)
+	**********************************************
+	**********************************************
+	Added "CS2113 lecture", happening on Friday 4 to 6pm!
+	**********************************************
+	**********************************************
+	Marked "Liu Wenyi: Answer CS2113 tutorial questions" as done for you!
+	[X][T]1. Liu Wenyi: Answer CS2113 tutorial questions
+	**********************************************
+	**********************************************
+	you have 3 things in your list:
+	[X][T]1. Liu Wenyi: Answer CS2113 tutorial questions
+	[ ][D]2. weekly CS2113 quiz (by: Monday 9pm)
+	[ ][E]3. CS2113 lecture (from: Friday 4 to: 6pm)
+	**********************************************
+	**********************************************
+	OK bye!
+	**********************************************

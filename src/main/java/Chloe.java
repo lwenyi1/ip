@@ -141,11 +141,14 @@ public class Chloe {
      */
     public static void main(String[] args) {
         sayHi(); // Greet the user
+        Scanner scanner = new Scanner(System.in); // initiate scanner
 
         // Interactive loop
         while (isRunning) {
             // Read user entries
-            Scanner scanner = new Scanner(System.in);
+            if (!scanner.hasNextLine()) { // Avoid reading if no input is available
+                break;
+            }
             String userEntry = scanner.nextLine();
 
             // Implement different commands

@@ -3,28 +3,66 @@
 	How can I help you today?
 	**********************************************
 	**********************************************
-	Added "Liu Wenyi: Answer CS2113 tutorial questions" for you!
+	Add a task first, then
+	Enter a valid task index, e.g. mark 1
 	**********************************************
 	**********************************************
-	Added "weekly CS2113 quiz" for you, do it by: Monday 9pm!
+	Add a task first, then
+	Enter a valid task index, e.g. mark 1
 	**********************************************
 	**********************************************
-	you have 2 things in your list:
-	[ ][T]1. Liu Wenyi: Answer CS2113 tutorial questions
-	[ ][D]2. weekly CS2113 quiz (by: Monday 9pm)
+	Please use the format: todo <description>
 	**********************************************
 	**********************************************
-	Added "CS2113 lecture", happening on Friday 4 to 6pm!
+	Added "hi" for you!
 	**********************************************
 	**********************************************
-	Marked "Liu Wenyi: Answer CS2113 tutorial questions" as done for you!
-	[X][T]1. Liu Wenyi: Answer CS2113 tutorial questions
+	Please use the format: deadline <description> /by <due date>
+	**********************************************
+	**********************************************
+	Please use the format: deadline <description> /by <due date>
+	**********************************************
+	**********************************************
+	Added "hey" for you, do it by: today!
+	**********************************************
+	**********************************************
+	Please use the format: event <description> /from <date/time> /to <end date/time>
+	**********************************************
+	**********************************************
+	Please use the format: event <description> /from <date/time> /to <end date/time>
+	**********************************************
+	**********************************************
+	Please use the format: event <description> /from <date/time> /to <end date/time>
+	**********************************************
+	**********************************************
+	Added "hello", happening on today to tmr!
 	**********************************************
 	**********************************************
 	you have 3 things in your list:
-	[X][T]1. Liu Wenyi: Answer CS2113 tutorial questions
-	[ ][D]2. weekly CS2113 quiz (by: Monday 9pm)
-	[ ][E]3. CS2113 lecture (from: Friday 4 to: 6pm)
+	[ ][T]1. hi
+	[ ][D]2. hey (by: today)
+	[ ][E]3. hello (from: today to: tmr)
+	**********************************************
+	**********************************************
+	Enter a valid task index, e.g. mark 1
+	**********************************************
+	**********************************************
+	Marked "hi" as done for you!
+	[X][T]1. hi
+	**********************************************
+	**********************************************
+	Oh "hi" is not done? Unmarked.
+	[ ][T]1. hi
+	**********************************************
+	**********************************************
+	you have 3 things in your list:
+	[ ][T]1. hi
+	[ ][D]2. hey (by: today)
+	[ ][E]3. hello (from: today to: tmr)
+	**********************************************
+	**********************************************
+	I'm sorry I don't know what you mean!!
+	Please choose a valid command :")
 	**********************************************
 	**********************************************
 	OK bye!

@@ -12,6 +12,59 @@ public class Chloe {
     private static List<Task> taskList = new ArrayList<>(); // List of tasks
 
     /**
+     * The main method serves as the entry point of the program.
+     * It greets the user, enters an interactive loop to read commands
+     * from the console, and exits when the user types "bye".
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(String[] args) {
+        sayHi(); // Greet the user
+        Scanner scanner = new Scanner(System.in); // initiate scanner
+
+        // Interactive loop
+        while (isRunning) {
+            // Read user entries
+            if (!scanner.hasNextLine()) { // Avoid reading if no input is available
+                break;
+            }
+            String userEntry = scanner.nextLine();
+
+            // Split into commands and details of task
+            String[] stringParts = userEntry.split(" ", 2);
+            String userCommand = stringParts[0];
+            String taskDetails = stringParts.length > 1? stringParts[1] : "";
+
+            // Handle commands
+            switch(userCommand.toLowerCase()) {
+            case "bye": // Exit the program when "bye" is typed
+                isRunning = false;
+                break;
+            case "list":
+                listTasks();
+                break;
+            case "todo":
+                addTodo(taskDetails);
+                break;
+            case "deadline":
+                addDeadline(taskDetails);
+                break;
+            case "event":
+                addEvent(taskDetails);
+                break;
+            case "mark":
+            case "unmark":
+                handleTaskMarking(userCommand.toLowerCase(), stringParts);
+                break;
+            default:
+                handleBadCommand();
+            }
+        }
+
+        sayBye(); // Say goodbye
+    }
+
+    /**
      * Displays a greeting message from Chloe.
      * This method prints a decorative line, a friendly message,
      * and another decorative line.
@@ -40,7 +93,8 @@ public class Chloe {
     public static void handleBadCommand() {
         System.out.println(LINE);
         System.out.println("\tI'm sorry I don't know what you mean!!");
-        System.out.println("\tEnter a valid command please :\")");
+        System.out.println("\tPlease choose a valid command :\")");
+        //System.out.println("\tUse help for a list of commands");
         System.out.println(LINE);
     }
 
@@ -49,6 +103,13 @@ public class Chloe {
      * */
     public static void addTodo(String task) {
         // Adds task to the list
+        if (task.isEmpty()) {
+            System.out.println(LINE);
+            System.out.println("\tPlease use the format: todo <description>");
+            System.out.println(LINE);
+            return;
+        }
+
         Task newTask = new Task(task);
         newTask.printTaskAddition();
         taskList.add(newTask);
@@ -62,6 +123,13 @@ public class Chloe {
         String[] stringParts = task.split(" /by ", 2);
         String taskDescription = stringParts[0];
         String dueDate = stringParts.length > 1? stringParts[1] : "";
+
+        if (taskDescription.isEmpty() || dueDate.isEmpty()) {
+            System.out.println(LINE);
+            System.out.println("\tPlease use the format: deadline <description> /by <due date>");
+            System.out.println(LINE);
+            return;
+        }
 
         // Adds deadline to the list
         Deadline newDeadline = new Deadline(taskDescription, dueDate);
@@ -80,6 +148,14 @@ public class Chloe {
                 (stringParts.length > 1? stringParts[1] : "").split(" /to ");
         String from = timeParts[0];
         String to = timeParts.length > 1? timeParts[1] : "";
+
+        if (taskDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
+            System.out.println(LINE);
+            System.out.println("\tPlease use the format: event <description> /from <date/time>" +
+                    " /to <end date/time>");
+            System.out.println(LINE);
+            return;
+        }
 
         // Adds event to the list
         Event newEvent = new Event(taskDescription, from, to);
@@ -103,91 +179,40 @@ public class Chloe {
     }
 
     /**
-     * Marks task as done.
-     * Updates the task status and informs user.
-     * */
-    public static void markTask(int taskId) {
-        Task task = taskList.get(taskId);
-        task.updateStatus(true);
-        System.out.println(LINE);
-        System.out.println("\tMarked \""+task.getTaskDescription()
-                            +"\" as done for you!");
-        System.out.println("\t"+task.getStatusIcon() + task.getTaskType()
-                +(taskId+1)+". " + task.toString());
-        System.out.println(LINE);
-    }
-
-    /**
-     * Unmarks task as done.
-     * Updates the task status and informs user.
-     * */
-    public static void unmarkTask(int taskId) {
-        Task task = taskList.get(taskId);
-        task.updateStatus(false);
-        System.out.println(LINE);
-        System.out.println("\tOh \""+task.getTaskDescription()
-                +"\" is not done? Unmarked.");
-        System.out.println("\t"+task.getStatusIcon() + task.getTaskType()
-                +(taskId+1)+". " + task.toString());
-        System.out.println(LINE);
-    }
-
-    /**
-     * The main method serves as the entry point of the program.
-     * It greets the user, enters an interactive loop to read commands
-     * from the console, and exits when the user types "bye".
-     *
-     * @param args command-line arguments (not used)
+     * Print error message for marking or unmarking tasks.
      */
-    public static void main(String[] args) {
-        sayHi(); // Greet the user
-        Scanner scanner = new Scanner(System.in); // initiate scanner
-
-        // Interactive loop
-        while (isRunning) {
-            // Read user entries
-            if (!scanner.hasNextLine()) { // Avoid reading if no input is available
-                break;
-            }
-            String userEntry = scanner.nextLine();
-
-            // Implement different commands
-            String[] stringParts = userEntry.split(" ", 2);
-            String userCommand = stringParts[0];
-            String taskDetails = stringParts.length > 1? stringParts[1] : "";
-
-            // Handle commands
-            switch(userCommand.toLowerCase()) {
-            case "bye": // Exit the program when "bye" is typed
-                isRunning = false;
-                break;
-            case "list":
-                listTasks();
-                break;
-            case "todo":
-                addTodo(taskDetails);
-                break;
-            case "deadline":
-                addDeadline(taskDetails);
-                break;
-            case "event":
-                addEvent(taskDetails);
-                break;
-            case "mark":
-                int markTaskId = stringParts.length > 1 ?
-                        (Integer.parseInt(stringParts[1])-1) : -1;
-                markTask(markTaskId);
-                break;
-            case "unmark":
-                int unmarkTaskId = stringParts.length > 1 ?
-                        (Integer.parseInt(stringParts[1])-1) : -1;
-                unmarkTask(unmarkTaskId);
-                break;
-            default:
-                handleBadCommand();
-            }
+    private static void printMarkError() {
+        System.out.println(LINE);
+        if (taskList.isEmpty()) {
+            System.out.println("\tAdd a task first, then");
         }
+        System.out.println("\tEnter a valid task index, e.g. mark 1");
+        System.out.println(LINE);
+    }
 
-        sayBye(); // Say goodbye
+    /**
+     * Marks or unmarks the task specified.
+     */
+    public static void handleTaskMarking(String markOrUnmark, String[] stringParts) {
+        boolean commandIsMark = markOrUnmark.equals("mark");
+
+        try {
+            int taskId = Integer.parseInt(stringParts[1])-1;
+            Task task = taskList.get(taskId);
+            task.updateStatus(commandIsMark);
+            System.out.println(LINE);
+            if (commandIsMark) {
+                System.out.println("\tMarked \"" + task.getTaskDescription()
+                    + "\" as done for you!");
+            } else {
+                System.out.println("\tOh \"" + task.getTaskDescription()
+                        + "\" is not done? Unmarked.");
+            }
+            System.out.println("\t" + task.getStatusIcon() + task.getTaskType()
+                    + (taskId + 1) + ". " + task.toString());
+            System.out.println(LINE);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            printMarkError();
+        }
     }
 }

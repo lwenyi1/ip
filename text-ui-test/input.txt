@@ -1,7 +1,18 @@
-todo Liu Wenyi: Answer CS2113 tutorial questions
-deadline weekly CS2113 quiz /by Monday 9pm
+mark
+unmark
+todo
+todo hi
+deadline
+deadline hey
+deadline hey /by today
+event
+event hello
+event hello /from today
+event hello /from today /to tmr
 list
-event CS2113 lecture /from Friday 4 /to 6pm
+mark 0
 mark 1
+unmark 1
 list
+boguscommand
 bye

@@ -1,6 +1,6 @@
 package chloe;
 
-import java.util.*;
+import java.util.Scanner;
 
 /**
  * The {@code Chloe} class is a simple interactive program where Chloe.Chloe

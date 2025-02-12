@@ -1,9 +1,13 @@
 package chloe;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import chloe.exceptions.*;
-import chloe.tasktypes.*;
+import chloe.exceptions.IllegalCommandException;
+import chloe.exceptions.IncompleteCommandException;
+import chloe.tasktypes.Task;
+import chloe.tasktypes.Deadline;
+import chloe.tasktypes.Event;
 
 public class TaskManager {
     private static final String LINE = "\t**********************************************";

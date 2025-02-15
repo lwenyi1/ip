@@ -40,6 +40,9 @@ public class TaskManager {
             case "unmark":
                 handleTaskMarking(userCommand.toLowerCase(), stringParts);
                 break;
+            case "delete":
+                deleteTask(stringParts);
+                break;
             default:
                 throw new IllegalCommandException();
             }
@@ -176,6 +179,21 @@ public class TaskManager {
             System.out.println("\tOh \"" + task.getTaskDescription()
                     + "\" is not done? Unmarked.");
         }
+        System.out.println("\t" + task.getStatusIcon() + task.getTaskType()
+                + (taskId + 1) + ". " + task.toString());
+        System.out.println(LINE);
+    }
+
+    /**
+     * Deletes the specified task
+     * */
+    public static void deleteTask(String[] stringParts) {
+        int taskId = Integer.parseInt(stringParts[1])-1;
+        Task task = taskList.get(taskId);
+        taskList.remove(taskId);
+
+        System.out.println(LINE);
+        System.out.println("\tOk! Deleting this task:");
         System.out.println("\t" + task.getStatusIcon() + task.getTaskType()
                 + (taskId + 1) + ". " + task.toString());
         System.out.println(LINE);

@@ -48,6 +48,8 @@ public class TaskManager {
         } catch (IncompleteCommandException e) {
             String message = e.getMessage();
             handleIncompleteCommand(message);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            handleBadIndex();
         }
 
         return true;
@@ -61,6 +63,18 @@ public class TaskManager {
         System.out.println("\tI'm sorry I don't know what you mean!!");
         System.out.println("\tPlease choose a valid command :\")");
         //System.out.println("\tUse help for a list of commands");
+        System.out.println(LINE);
+    }
+
+    /**
+     * Prints message asking user for valid task index.
+     */
+    public static void handleBadIndex() {
+        System.out.println(LINE);
+        if (taskList.isEmpty()) {
+            System.out.println("\tAdd a task first, then");
+        }
+        System.out.println("\tEnter a valid task index");
         System.out.println(LINE);
     }
 
@@ -150,29 +164,20 @@ public class TaskManager {
     public static void handleTaskMarking(String markOrUnmark, String[] stringParts) {
         boolean commandIsMark = markOrUnmark.equals("mark");
 
-        try {
-            int taskId = Integer.parseInt(stringParts[1])-1;
-            Task task = taskList.get(taskId);
-            task.updateStatus(commandIsMark);
+        int taskId = Integer.parseInt(stringParts[1])-1;
+        Task task = taskList.get(taskId);
+        task.updateStatus(commandIsMark);
 
-            System.out.println(LINE);
-            if (commandIsMark) {
-                System.out.println("\tMarked \"" + task.getTaskDescription()
-                        + "\" as done for you!");
-            } else {
-                System.out.println("\tOh \"" + task.getTaskDescription()
-                        + "\" is not done? Unmarked.");
-            }
-            System.out.println("\t" + task.getStatusIcon() + task.getTaskType()
-                    + (taskId + 1) + ". " + task.toString());
-            System.out.println(LINE);
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.out.println(LINE);
-            if (taskList.isEmpty()) {
-                System.out.println("\tAdd a task first, then");
-            }
-            System.out.println("\tEnter a valid task index, e.g. mark 1");
-            System.out.println(LINE);
+        System.out.println(LINE);
+        if (commandIsMark) {
+            System.out.println("\tMarked \"" + task.getTaskDescription()
+                    + "\" as done for you!");
+        } else {
+            System.out.println("\tOh \"" + task.getTaskDescription()
+                    + "\" is not done? Unmarked.");
         }
+        System.out.println("\t" + task.getStatusIcon() + task.getTaskType()
+                + (taskId + 1) + ". " + task.toString());
+        System.out.println(LINE);
     }
 }

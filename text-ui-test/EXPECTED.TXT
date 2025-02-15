@@ -4,11 +4,11 @@
 	**********************************************
 	**********************************************
 	Add a task first, then
-	Enter a valid task index, e.g. mark 1
+	Enter a valid task index
 	**********************************************
 	**********************************************
 	Add a task first, then
-	Enter a valid task index, e.g. mark 1
+	Enter a valid task index
 	**********************************************
 	**********************************************
 	Please use the format: todo <description>
@@ -44,7 +44,7 @@
 	[ ][E]3. hello (from: today to: tmr)
 	**********************************************
 	**********************************************
-	Enter a valid task index, e.g. mark 1
+	Enter a valid task index
 	**********************************************
 	**********************************************
 	Marked "hi" as done for you!

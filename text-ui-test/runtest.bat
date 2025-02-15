@@ -1,5 +1,9 @@
 @ECHO OFF
 
+REM Clean previous build
+if exist ..\bin rmdir /s /q ..\bin
+mkdir ..\bin
+
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
@@ -15,7 +19,7 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin Chloe < input.txt > ACTUAL.TXT
+java -classpath ..\bin chloe.Chloe < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT

@@ -20,6 +20,7 @@ REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ..\bin chloe.Chloe < input.txt > ACTUAL.TXT
+REM NOTE: change ACTUAL to EXPECTED and comment out FC below to update EXPECTED.TXT easily
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT

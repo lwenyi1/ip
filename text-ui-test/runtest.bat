@@ -36,3 +36,9 @@ REM run the program again, check if previous list was stored properly
 java -classpath ..\bin chloe.Chloe < input2.txt > ACTUAL2.TXT
 REM compare the output to the expected output
 FC ACTUAL2.TXT EXPECTED2.TXT
+
+REM end and clean files
+echo End of test.
+if exist ACTUAL.TXT del ACTUAL.TXT
+if exist ACTUAL2.TXT del ACTUAL2.TXT
+if exist data rmdir /s /q data

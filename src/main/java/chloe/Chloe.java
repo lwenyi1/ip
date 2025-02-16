@@ -31,7 +31,7 @@ public class Chloe {
                 break;
             }
             String userEntry = scanner.nextLine();
-            isRunning = taskManager.handleCommand(userEntry); // Will return false for terminationh
+            isRunning = taskManager.handleCommand(userEntry); // Will return false for termination
         }
 
         sayBye(); // Say goodbye

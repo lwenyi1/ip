@@ -37,4 +37,8 @@ public class Task {
     public String toString() {
         return taskDescription;
     }
+
+    public String toFileString() {
+        return "T # " + (isDone ? "1" : "0") + " # " + taskDescription;
+    }
 }

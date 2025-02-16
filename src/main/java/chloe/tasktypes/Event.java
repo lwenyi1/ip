@@ -28,4 +28,9 @@ public class Event extends Task{
     public String toString() {
         return super.toString() + " (from: " + this.from + " to: " + this.to + ")";
     }
+
+    @Override
+    public String toFileString() {
+        return "E # " + (isDone ? "1" : "0") + " # " + taskDescription + " # " + from + " # " + to;
+    }
 }

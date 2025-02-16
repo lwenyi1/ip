@@ -30,4 +30,9 @@ public class Deadline extends Task {
     public String toString() {
         return super.toString() + " (by: " + dueDate + ")";
     }
+
+    @Override
+    public String toFileString() {
+        return "D # " + (isDone ? "1" : "0") + " # " + taskDescription + " # " + dueDate;
+    }
 }

@@ -1,3 +1,5 @@
+No saved tasks found. New file created at: C:\Users\liuwe\Documents\CS2113 projects\ip\text-ui-test\data\chloeTasks.txt
+Tasks loaded successfully from: C:\Users\liuwe\Documents\CS2113 projects\ip\text-ui-test\data\chloeTasks.txt
 	**********************************************
 	Hi! I'm Chloe!
 	How can I help you today?

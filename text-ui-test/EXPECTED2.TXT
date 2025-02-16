@@ -1,0 +1,13 @@
+Tasks loaded successfully from: C:\Users\liuwe\Documents\CS2113 projects\ip\text-ui-test\data\chloeTasks.txt
+	**********************************************
+	Hi! I'm Chloe!
+	How can I help you today?
+	**********************************************
+	**********************************************
+	you have 2 things in your list:
+	[ ][D]1. hey (by: today)
+	[ ][E]2. hello (from: today to: tmr)
+	**********************************************
+	**********************************************
+	OK bye!
+	**********************************************

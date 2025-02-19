@@ -24,7 +24,7 @@ public class TaskManager {
     private static final String FILE_NAME;
     private static List<Task> taskList = new ArrayList<>(); // List of tasks
 
-
+    // Set up the variables needed for the file operations
     static {
         // Use the working directory to ensure JAR compatibility
         File baseDir = new File(System.getProperty("user.dir"), "data");
@@ -32,6 +32,11 @@ public class TaskManager {
         FILE_NAME = new File(DIRECTORY, "chloeTasks.txt").getAbsolutePath();
     }
 
+    /**
+     * Constructor for the TaskManager class.
+     * Loads saved tasks from the save file to the task list
+     * upon start up.
+     * */
     public TaskManager() {
         loadSavedTasks();
     }
@@ -112,8 +117,8 @@ public class TaskManager {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" # ");
-                if (parts.length < 3) continue;
+                String[] parts = line.split(" # "); // Use # to split task components
+                if (parts.length < 3) continue; // Skip lousy lines which are missing data
 
                 String type = parts[0];
                 boolean isDone = parts[1].equals("1");
@@ -127,11 +132,11 @@ public class TaskManager {
                 } else if (type.equals("E") && parts.length == 5) {
                     task = new Event(description, parts[3], parts[4]);
                 } else {
-                    continue;
+                    continue; // Skip lousy lines with wrong data
                 }
 
-                task.updateStatus(isDone);
-                taskList.add(task);
+                task.updateStatus(isDone); // Mark tasks which were previously marked
+                taskList.add(task); // Add to task list
             }
             System.out.println("Tasks loaded successfully from: " + FILE_NAME);
         } catch (IOException e) {
@@ -142,6 +147,8 @@ public class TaskManager {
 
     /**
      * Updates the save file with the new task list.
+     * Rewrites the file each time. Maybe will optimise
+     * this at some point when I have time :""
      */
     private static void updateSaveFile() {
         File file = new File(FILE_NAME);

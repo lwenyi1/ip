@@ -34,6 +34,7 @@ public class Chloe {
             isRunning = taskManager.handleCommand(userEntry); // Will return false for termination
         }
 
+        scanner.close();
         sayBye(); // Say goodbye
     }
 

@@ -1,6 +1,9 @@
 package chloe;
 
 // For collections
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 // For chloe task management
@@ -95,13 +98,18 @@ public class Storage {
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
 
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
         Task task;
         if (type.equals("T")) {
             task = new Task(description);
         } else if (type.equals("D") && parts.length == 4) {
-            task = new Deadline(description, parts[3]);
+            LocalDateTime dueDate = LocalDateTime.parse(parts[3], inputFormatter);
+            task = new Deadline(description, dueDate);
         } else if (type.equals("E") && parts.length == 5) {
-            task = new Event(description, parts[3], parts[4]);
+            LocalDateTime startDate = LocalDateTime.parse(parts[3], inputFormatter);
+            LocalDateTime endDate = LocalDateTime.parse(parts[4], inputFormatter);
+            task = new Event(description, startDate, endDate);
         } else {
             System.out.println("Unknown task type encountered: " + type);
             System.out.println("Skipping line...");

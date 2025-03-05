@@ -23,7 +23,7 @@ Tasks loaded successfully from: C:\Users\liuwe\Documents\CS2113 projects\ip\text
 	Please use the format: deadline <description> /by <due date>
 	**********************************************
 	**********************************************
-	Added "hey" for you, do it by: today!
+	Added "hey" for you, do it by: 20-02-2025 00:00!
 	**********************************************
 	**********************************************
 	Please use the format: event <description> /from <date/time> /to <end date/time>
@@ -35,13 +35,12 @@ Tasks loaded successfully from: C:\Users\liuwe\Documents\CS2113 projects\ip\text
 	Please use the format: event <description> /from <date/time> /to <end date/time>
 	**********************************************
 	**********************************************
-	Added "hello", happening on today to tmr!
+	Please date and time in the format dd/MM/yyyy HH:mm
 	**********************************************
 	**********************************************
-	you have 3 things in your list:
+	you have 2 things in your list:
 	[ ][T]1. hi
-	[ ][D]2. hey (by: today)
-	[ ][E]3. hello (from: today to: tmr)
+	[ ][D]2. hey (by: 20-02-2025 00:00)
 	**********************************************
 	**********************************************
 	Enter a valid task index
@@ -66,9 +65,8 @@ Tasks loaded successfully from: C:\Users\liuwe\Documents\CS2113 projects\ip\text
 	[ ][T]1. hi
 	**********************************************
 	**********************************************
-	you have 2 things in your list:
-	[ ][D]1. hey (by: today)
-	[ ][E]2. hello (from: today to: tmr)
+	you have 1 things in your list:
+	[ ][D]1. hey (by: 20-02-2025 00:00)
 	**********************************************
 	**********************************************
 	I'm sorry I don't know what you mean!!

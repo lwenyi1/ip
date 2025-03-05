@@ -3,6 +3,13 @@ package chloe.commands;
 import chloe.TaskList;
 import chloe.tasktypes.Task;
 
+/**
+ * The {@code ListTasks} class is responsible for listing all tasks in the task list.
+ * 
+ * @author Wenyi
+ * @version 1.0
+ * @since 2025-03-06
+ */
 public class ListTasks extends CommandHandler{
 
     public ListTasks(String taskDetails, TaskList taskList) {

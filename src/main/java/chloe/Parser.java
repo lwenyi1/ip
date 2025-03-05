@@ -1,7 +1,4 @@
 package chloe;
-// For collections
-import java.util.ArrayList;
-import java.util.List;
 
 // For chloe task management
 import chloe.commands.CommandHandler;
@@ -9,17 +6,35 @@ import chloe.commands.AddDeadline;
 import chloe.commands.AddEvent;
 import chloe.commands.AddTodo;
 import chloe.commands.DeleteTask;
+import chloe.commands.FindTask;
 import chloe.commands.ListTasks;
 import chloe.commands.MarkCommand;
 import chloe.exceptions.IllegalCommandException;
-import chloe.exceptions.IncompleteCommandException;
-import chloe.exceptions.ParseErrorException;
-import chloe.tasktypes.Task;
-import chloe.tasktypes.Deadline;
-import chloe.tasktypes.Event;
 
+/**
+ * The {@code Parser} class is responsible for interpreting user commands
+ * and returning the corresponding {@code CommandHandler} object.
+ *
+ * <p>This class processes user input, extracts the command, and determines
+ * the appropriate action by creating and returning a relevant command object.</p>
+ *
+ * @author Wenyi
+ * @version 1.0
+ * @since 2025-03-06
+ */
 public class Parser {
 
+    /**
+     * Parses the user's input command and returns the appropriate {@code CommandHandler} object.
+     *
+     * <p>This method splits the input into the command and task details, then
+     * uses a switch expression to return the corresponding command object.</p>
+     *
+     * @param userEntry The full command input from the user.
+     * @param taskList The {@code TaskList} that contains all tasks.
+     * @return The appropriate {@code CommandHandler} object based on the command.
+     * @throws IllegalCommandException If the command is invalid or unrecognized.
+     */
     public CommandHandler parseCommand (String userEntry, TaskList taskList) throws IllegalCommandException {
         // Split into commands and details of task
         String[] stringParts = userEntry.split(" ", 2);
@@ -36,6 +51,7 @@ public class Parser {
             case "deadline" -> new AddDeadline(taskDetails, taskList);
             case "event" -> new AddEvent(taskDetails, taskList);
             case "mark", "unmark" -> new MarkCommand(userCommand.toLowerCase(), stringParts, taskDetails, taskList);
+            case "find" -> new FindTask(taskDetails, taskList);
             case "delete" -> new DeleteTask(stringParts, taskDetails, taskList);
             default -> throw new IllegalCommandException(ILLEGAL_COMMAND_MESSAGE);
         };

@@ -1,6 +1,9 @@
 package chloe;
 
 // For collections
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 // For chloe task management
@@ -18,6 +21,15 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * The {@code Storage} class handles file operations for chloe.
+ * 
+ * <p>This class provides methods for saving and loading tasks from a text file.</p>
+ * 
+ * @author Wenyi
+ * @version 1.0
+ * @since 2025-03-06
+ */
 public class Storage {
     private static final String DIRECTORY;
     private static final String FILE_NAME;
@@ -70,6 +82,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses a line of text from the saved tasks file and adds the corresponding Task
+     * object to the provided TaskList. The line is expected to be in a specific format
+     * where the first part indicates the task type ("T" for Todo, "D" for Deadline, "E" for Event),
+     * the second part indicates whether the task is done ("1" for done, "0" for not done), and
+     * the remaining parts contain the task description and other task-specific details.
+     * 
+     * The method handles Task, Deadline, and Event types and updates the task's status
+     * before adding it to the TaskList. If an unknown task type is encountered, the line is skipped.
+     *
+     * @param line      the line of text representing a task
+     * @param taskList  the TaskList to which the parsed Task object will be added
+     */
+
     private static void parseTaskLine(String line, TaskList taskList) {
         String[] parts = line.split(TASK_SPLITTER);
         if (parts.length < 3) return;
@@ -78,13 +104,18 @@ public class Storage {
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
 
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
         Task task;
         if (type.equals("T")) {
             task = new Task(description);
         } else if (type.equals("D") && parts.length == 4) {
-            task = new Deadline(description, parts[3]);
+            LocalDateTime dueDate = LocalDateTime.parse(parts[3], inputFormatter);
+            task = new Deadline(description, dueDate);
         } else if (type.equals("E") && parts.length == 5) {
-            task = new Event(description, parts[3], parts[4]);
+            LocalDateTime startDate = LocalDateTime.parse(parts[3], inputFormatter);
+            LocalDateTime endDate = LocalDateTime.parse(parts[4], inputFormatter);
+            task = new Event(description, startDate, endDate);
         } else {
             System.out.println("Unknown task type encountered: " + type);
             System.out.println("Skipping line...");
@@ -96,9 +127,10 @@ public class Storage {
     }
 
     /**
-     * Updates the save file with the new task list.
-     * Rewrites the file each time. Maybe will optimise
-     * this at some point when I have time :""
+     * Updates the saved tasks file with the current contents of the TaskList.
+     * This method overwrites the existing file with the new tasks.
+     * If any errors occur during the file operation, an error message is printed to the console.
+     * @param taskList the TaskList containing the tasks to be saved to the file
      */
     public static void updateSaveFile(List<Task> taskList) {
 

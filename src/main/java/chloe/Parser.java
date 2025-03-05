@@ -5,7 +5,9 @@ import java.util.List;
 
 // For chloe task management
 import chloe.commands.AddDeadline;
+import chloe.commands.AddEvent;
 import chloe.commands.AddTodo;
+import chloe.commands.ListTasks;
 import chloe.exceptions.IllegalCommandException;
 import chloe.exceptions.IncompleteCommandException;
 import chloe.exceptions.ParseErrorException;
@@ -32,19 +34,20 @@ public class Parser {
         try {
             switch (userCommand.toLowerCase()) {
             case "list":
-                listTasks();
+                ListTasks listTasks = new ListTasks(taskDetails, taskList);
+                listTasks.execute();
                 break;
             case "todo":
                 AddTodo addTodo = new AddTodo(taskDetails, taskList);
                 addTodo.execute();
                 break;
             case "deadline":
-                //addDeadline(taskDetails);
                 AddDeadline addDeadline = new AddDeadline(taskDetails, taskList);
                 addDeadline.execute();
                 break;
             case "event":
-                addEvent(taskDetails);
+                AddEvent addEvent = new AddEvent(taskDetails, taskList);
+                addEvent.execute();
                 break;
             case "mark":
             case "unmark":
@@ -78,63 +81,6 @@ public class Parser {
             return("\tAdd a task first, then enter a valid task index");
         }
         return("\tEnter a valid task index");
-    }
-
-    /**
-     * Reads in deadline from the user and adds it to the task list.
-     * */
-    public void addDeadline(String task) throws IncompleteCommandException {
-        // Split task name and due date
-        String[] stringParts = task.split(" /by ", 2);
-        String taskDescription = stringParts[0];
-        String dueDate = stringParts.length > 1? stringParts[1] : "";
-
-        if (taskDescription.isEmpty() || dueDate.isEmpty()) {
-            throw new IncompleteCommandException("Please use the format: deadline <description> /by <due date>");
-        }
-
-        // Adds deadline to the list
-        Deadline newDeadline = new Deadline(taskDescription, dueDate);
-        newDeadline.printTaskAddition();
-        taskList.addTask(newDeadline);
-    }
-
-    /**
-     * Reads in event from the user and adds it to the task list.
-     * */
-    public void addEvent(String task) throws IncompleteCommandException {
-        // Split task name and due date
-        String[] stringParts = task.split(" /from ", 2);
-        String taskDescription = stringParts[0];
-        String[] timeParts =
-                (stringParts.length > 1? stringParts[1] : "").split(" /to ");
-        String from = timeParts[0];
-        String to = timeParts.length > 1? timeParts[1] : "";
-
-        if (taskDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
-            throw new IncompleteCommandException("Please use the format: event <description> /from <date/time>"
-                    + " /to <end date/time>");
-        }
-
-        // Adds event to the list
-        Event newEvent = new Event(taskDescription, from, to);
-        newEvent.printTaskAddition();
-        taskList.addTask(newEvent);
-    }
-
-    /**
-     * Lists the tasks stored thus far.
-     * Prints out the tasks line by line.
-     * */
-    public void listTasks() {
-        System.out.println(LINE);
-        System.out.println("\tyou have " + taskList.getListSize() + " things in your list:");
-        for(int i = 0; i < taskList.getListSize(); i++) {
-            Task task = taskList.getTask(i);
-            System.out.println("\t"+task.getStatusIcon() + task.getTaskType()
-                    +(i+1)+". " + task.toString());
-        }
-        System.out.println(LINE);
     }
 
     /**

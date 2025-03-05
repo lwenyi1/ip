@@ -4,7 +4,6 @@ import chloe.TaskList;
 import chloe.tasktypes.Task;
 
 public class ListTasks extends CommandHandler{
-    private static final String LINE = "\t**********************************************";
 
     public ListTasks(String taskDetails, TaskList taskList) {
         super(taskDetails, taskList);

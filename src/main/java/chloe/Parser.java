@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 // For chloe task management
+import javax.swing.plaf.basic.BasicBorders;
+
 import chloe.commands.AddDeadline;
 import chloe.commands.AddEvent;
 import chloe.commands.AddTodo;
+import chloe.commands.DeleteTask;
 import chloe.commands.ListTasks;
+import chloe.commands.MarkCommand;
 import chloe.exceptions.IllegalCommandException;
 import chloe.exceptions.IncompleteCommandException;
 import chloe.exceptions.ParseErrorException;
@@ -51,10 +55,14 @@ public class Parser {
                 break;
             case "mark":
             case "unmark":
-                handleTaskMarking(userCommand.toLowerCase(), stringParts);
+                //handleTaskMarking(userCommand.toLowerCase(), stringParts);
+                MarkCommand markCommand = new MarkCommand(userCommand.toLowerCase(), stringParts, taskDetails, taskList);
+                markCommand.execute();
                 break;
             case "delete":
-                deleteTask(stringParts);
+                //deleteTask(stringParts);
+                DeleteTask deleteTask = new DeleteTask(stringParts, taskDetails, taskList);
+                deleteTask.execute();
                 break;
             default:
                 throw new IllegalCommandException();
@@ -81,29 +89,6 @@ public class Parser {
             return("\tAdd a task first, then enter a valid task index");
         }
         return("\tEnter a valid task index");
-    }
-
-    /**
-     * Marks or unmarks the task specified.
-     */
-    public void handleTaskMarking(String markOrUnmark, String[] stringParts) {
-        boolean commandIsMark = markOrUnmark.equals("mark");
-
-        int taskId = Integer.parseInt(stringParts[1])-1;
-        Task task = taskList.getTask(taskId);
-        task.updateStatus(commandIsMark);
-
-        System.out.println(LINE);
-        if (commandIsMark) {
-            System.out.println("\tMarked \"" + task.getTaskDescription()
-                    + "\" as done for you!");
-        } else {
-            System.out.println("\tOh \"" + task.getTaskDescription()
-                    + "\" is not done? Unmarked.");
-        }
-        System.out.println("\t" + task.getStatusIcon() + task.getTaskType()
-                + (taskId + 1) + ". " + task.toString());
-        System.out.println(LINE);
     }
 
     /**

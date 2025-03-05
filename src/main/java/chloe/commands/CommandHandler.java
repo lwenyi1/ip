@@ -4,6 +4,8 @@ import chloe.TaskList;
 import chloe.exceptions.IncompleteCommandException;
 
 public class CommandHandler {
+    protected static final String LINE = "\t**********************************************";
+    // TODO remove these so not every child class has to define them
     protected final String taskDetails;
     protected final TaskList taskList;
 

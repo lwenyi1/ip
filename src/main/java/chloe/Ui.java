@@ -2,10 +2,11 @@ package chloe;
 
 import java.util.Scanner;
 
+import chloe.exceptions.ParseErrorException;
+
 public class Ui {
     // Line used when printing replies
     private static final String LINE = "\t**********************************************";
-    private static boolean isRunning = true; // Flag to keep program running
     static Parser parser = new Parser();
 
     public static void run() {
@@ -13,13 +14,22 @@ public class Ui {
         Scanner scanner = new Scanner(System.in); // initiate scanner
 
         // Interactive loop
-        while (isRunning) {
+        while (true) {
             // Read user entries
             if (!scanner.hasNextLine()) { // Avoid reading if no input is available
                 break;
             }
             String userEntry = scanner.nextLine();
-            isRunning = parser.handleCommand(userEntry); // Will return false for termination
+            if (userEntry.equals("bye")) {
+                break;
+            }
+            try {
+                parser.handleCommand(userEntry);
+            } catch (ParseErrorException e) {
+                System.out.println(LINE);
+                System.out.println(e.getMessage());
+                System.out.println(LINE);
+            }
         }
 
         scanner.close();

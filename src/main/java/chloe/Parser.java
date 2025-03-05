@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 // For chloe task management
+import chloe.commands.AddDeadline;
+import chloe.commands.AddTodo;
 import chloe.exceptions.IllegalCommandException;
 import chloe.exceptions.IncompleteCommandException;
+import chloe.exceptions.ParseErrorException;
 import chloe.tasktypes.Task;
 import chloe.tasktypes.Deadline;
 import chloe.tasktypes.Event;
@@ -19,7 +22,7 @@ public class Parser {
         Storage.loadSavedTasks(taskList);
     }
 
-    public boolean handleCommand(String userEntry) {
+    public void handleCommand (String userEntry) throws ParseErrorException {
         // Split into commands and details of task
         String[] stringParts = userEntry.split(" ", 2);
         String userCommand = stringParts[0];
@@ -28,16 +31,17 @@ public class Parser {
         // Handle commands
         try {
             switch (userCommand.toLowerCase()) {
-            case "bye": // Exit the program when "bye" is typed
-                return false;
             case "list":
                 listTasks();
                 break;
             case "todo":
-                addTodo(taskDetails);
+                AddTodo addTodo = new AddTodo(taskDetails, taskList);
+                addTodo.execute();
                 break;
             case "deadline":
-                addDeadline(taskDetails);
+                //addDeadline(taskDetails);
+                AddDeadline addDeadline = new AddDeadline(taskDetails, taskList);
+                addDeadline.execute();
                 break;
             case "event":
                 addEvent(taskDetails);
@@ -53,63 +57,27 @@ public class Parser {
                 throw new IllegalCommandException();
             }
         } catch (IllegalCommandException e) {
-            handleBadCommand();
+            throw new ParseErrorException("\tI'm sorry I don't know what you mean!!\n"
+                + "\tPlease choose a valid command :\")");
         } catch (IncompleteCommandException e) {
             String message = e.getMessage();
-            handleIncompleteCommand(message);
+            throw new ParseErrorException("\t"+message);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            handleBadIndex();
+            String message = handleBadIndex();
+            throw new ParseErrorException(message);
         }
         List<Task> taskListToSave = taskList.getTaskList();
         Storage.updateSaveFile(taskListToSave); // Update file after every command
-
-        return true;
-    }
-
-    /**
-     * Prints message asking user for valid command.
-     * */
-    public static void handleBadCommand() {
-        System.out.println(LINE);
-        System.out.println("\tI'm sorry I don't know what you mean!!");
-        System.out.println("\tPlease choose a valid command :\")");
-        //System.out.println("\tUse help for a list of commands");
-        System.out.println(LINE);
     }
 
     /**
      * Prints message asking user for valid task index.
      */
-    public void handleBadIndex() {
-        System.out.println(LINE);
+    public String handleBadIndex() {
         if (taskList.isEmpty()) {
-            System.out.println("\tAdd a task first, then");
+            return("\tAdd a task first, then enter a valid task index");
         }
-        System.out.println("\tEnter a valid task index");
-        System.out.println(LINE);
-    }
-
-    /**
-     * Prints message asking user for valid command.
-     * */
-    public static void handleIncompleteCommand(String message) {
-        System.out.println(LINE);
-        System.out.println("\t" + message);
-        System.out.println(LINE);
-    }
-
-    /**
-     * Reads in task from the user and adds it to the task list.
-     * */
-    public void addTodo(String task) throws IncompleteCommandException {
-        // Adds task to the list
-        if (task.isEmpty()) {
-            throw new IncompleteCommandException("Please use the format: todo <description>");
-        }
-
-        Task newTask = new Task(task);
-        newTask.printTaskAddition();
-        taskList.addTask(newTask);
+        return("\tEnter a valid task index");
     }
 
     /**

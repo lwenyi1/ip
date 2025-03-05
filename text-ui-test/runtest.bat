@@ -15,7 +15,7 @@ REM Force delete the "data" directory
 if exist data rmdir /s /q data
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java\chloe -Xlint:none -d ..\bin ..\src\main\java\chloe\*.java ..\src\main\java\chloe\tasktypes\*.java ..\src\main\java\chloe\exceptions\*.java
+javac  -cp ..\src\main\java\chloe -Xlint:none -d ..\bin ..\src\main\java\chloe\*.java ..\src\main\java\chloe\tasktypes\*.java ..\src\main\java\chloe\exceptions\*.java ..\src\main\java\chloe\commands\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1

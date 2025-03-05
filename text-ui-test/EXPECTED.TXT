@@ -5,12 +5,10 @@ Tasks loaded successfully from: C:\Users\liuwe\Documents\CS2113 projects\ip\text
 	How can I help you today?
 	**********************************************
 	**********************************************
-	Add a task first, then
-	Enter a valid task index
+	Add a task first, then enter a valid task index
 	**********************************************
 	**********************************************
-	Add a task first, then
-	Enter a valid task index
+	Add a task first, then enter a valid task index
 	**********************************************
 	**********************************************
 	Please use the format: todo <description>

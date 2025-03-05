@@ -1,5 +1,8 @@
 package chloe.exceptions;
 
+/**
+ * Thrown when an incomplete command is entered by the user.
+ */
 public class IncompleteCommandException extends Exception{
     private final String message;
 

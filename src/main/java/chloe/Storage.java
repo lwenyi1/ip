@@ -18,6 +18,15 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * The {@code Storage} class handles file operations for chloe.
+ * 
+ * <p>This class provides methods for saving and loading tasks from a text file.</p>
+ * 
+ * @author Wenyi
+ * @version 1.0
+ * @since 2025-03-06
+ */
 public class Storage {
     private static final String DIRECTORY;
     private static final String FILE_NAME;

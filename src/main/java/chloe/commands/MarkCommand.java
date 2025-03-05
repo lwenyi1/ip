@@ -3,6 +3,13 @@ package chloe.commands;
 import chloe.TaskList;
 import chloe.tasktypes.Task;
 
+/**
+ * The {@code MarkCommand} class is responsible for marking or unmarking a task in the task list.
+ *
+ * @author Wenyi
+ * @version 1.0
+ * @since 2025-03-06
+ */
 public class MarkCommand extends CommandHandler{
     private final String markOrUnmark;
     private final String[] stringParts;
@@ -13,6 +20,12 @@ public class MarkCommand extends CommandHandler{
         this.stringParts = stringParts;
     }
 
+    /**
+     * Marks or unmarks a task in the task list.
+     *
+     * This method extracts the task id from the user's input and marks or unmarks the task with the given id.
+     * It then prints out the updated task status and description.
+     */
     @Override
     public void execute() {
         boolean commandIsMark = markOrUnmark.equals("mark");

@@ -10,6 +10,15 @@ import chloe.exceptions.ParseErrorException;
 import chloe.commands.CommandHandler;
 import chloe.tasktypes.Task;
 
+/**
+ * The {@code Ui} class is responsible for handling user input and displaying the program's output.
+ * 
+ * <p>This class provides methods to greet the user, respond to commands, and display the program's output.</p>
+ *
+ * @author Wenyi
+ * @version 1.0
+ * @since 2025-03-06
+ */
 public class Ui {
     // Line used when printing replies
     private static final String LINE = "\t**********************************************";
@@ -21,6 +30,16 @@ public class Ui {
         taskList = new TaskList();
         Storage.loadSavedTasks(taskList);
     }
+
+    /**
+     * Runs the interactive command-line interface for Chloe.
+     *
+     * <p>This method greets the user and enters an interactive loop that reads user input
+     * commands, parses them, and executes the corresponding actions. The loop continues
+     * until the user inputs "bye". It handles various exceptions, providing feedback for
+     * invalid commands and input errors. The task list is updated and saved to file after
+     * every valid command execution.</p>
+     */
 
     public static void run() {
         sayHi(); // Greet the user
@@ -94,6 +113,8 @@ public class Ui {
 
     /**
      * Handles exception by printing messages.
+     * 
+     * @param message
      */
     public static void handleException(String message) {
         System.out.println(LINE);

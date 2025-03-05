@@ -21,6 +21,9 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Handles file operations for chloe.
+ */
 public class Storage {
     private static final String DIRECTORY;
     private static final String FILE_NAME;
@@ -73,6 +76,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses a line of text from the saved tasks file and adds the corresponding Task
+     * object to the provided TaskList. The line is expected to be in a specific format
+     * where the first part indicates the task type ("T" for Todo, "D" for Deadline, "E" for Event),
+     * the second part indicates whether the task is done ("1" for done, "0" for not done), and
+     * the remaining parts contain the task description and other task-specific details.
+     * 
+     * The method handles Task, Deadline, and Event types and updates the task's status
+     * before adding it to the TaskList. If an unknown task type is encountered, the line is skipped.
+     *
+     * @param line      the line of text representing a task
+     * @param taskList  the TaskList to which the parsed Task object will be added
+     */
+
     private static void parseTaskLine(String line, TaskList taskList) {
         String[] parts = line.split(TASK_SPLITTER);
         if (parts.length < 3) return;
@@ -104,9 +121,10 @@ public class Storage {
     }
 
     /**
-     * Updates the save file with the new task list.
-     * Rewrites the file each time. Maybe will optimise
-     * this at some point when I have time :""
+     * Updates the saved tasks file with the current contents of the TaskList.
+     * This method overwrites the existing file with the new tasks.
+     * If any errors occur during the file operation, an error message is printed to the console.
+     * @param taskList the TaskList containing the tasks to be saved to the file
      */
     public static void updateSaveFile(List<Task> taskList) {
 

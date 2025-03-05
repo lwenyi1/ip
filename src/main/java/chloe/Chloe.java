@@ -6,12 +6,12 @@ package chloe;
  * The program runs until the user types "bye".
  */
 public class Chloe {
-
+    static Ui ui = new Ui();
     /**
      * The main method serves as the entry point of the program.
      */
     public static void main(String[] args) {
-        Ui.run();
+        ui.run();
     }
 
 }

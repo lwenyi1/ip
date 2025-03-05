@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import chloe.exceptions.IllegalCommandException;
 import chloe.exceptions.IncompleteCommandException;
-import chloe.exceptions.ParseErrorException;
 
 import chloe.commands.CommandHandler;
 import chloe.tasktypes.Task;

@@ -1,7 +1,5 @@
 package chloe;
 // For collections
-import java.util.ArrayList;
-import java.util.List;
 
 // For chloe task management
 import chloe.commands.CommandHandler;
@@ -12,11 +10,6 @@ import chloe.commands.DeleteTask;
 import chloe.commands.ListTasks;
 import chloe.commands.MarkCommand;
 import chloe.exceptions.IllegalCommandException;
-import chloe.exceptions.IncompleteCommandException;
-import chloe.exceptions.ParseErrorException;
-import chloe.tasktypes.Task;
-import chloe.tasktypes.Deadline;
-import chloe.tasktypes.Event;
 
 public class Parser {
 

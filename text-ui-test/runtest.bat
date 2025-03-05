@@ -28,14 +28,14 @@ REM run the program, feed commands from input.txt file and redirect the output t
 REM NOTE: change ACTUAL to EXPECTED and comment out FC below to update EXPECTED.TXT easily
 java -classpath ..\bin chloe.Chloe < input.txt > ACTUAL.TXT
 REM compare the output to the expected output
-FC ACTUAL.TXT EXPECTED.TXT
+ FC ACTUAL.TXT EXPECTED.TXT
 
 REM test save file loading
 echo Testing save file loading...
 REM run the program again, check if previous list was stored properly
 java -classpath ..\bin chloe.Chloe < input2.txt > ACTUAL2.TXT
 REM compare the output to the expected output
-FC ACTUAL2.TXT EXPECTED2.TXT
+ FC ACTUAL2.TXT EXPECTED2.TXT
 
 REM end and clean files
 echo End of test.

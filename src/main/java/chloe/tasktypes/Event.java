@@ -1,10 +1,13 @@
 package chloe.tasktypes;
 
-public class Event extends Task{
-    protected String from;
-    protected String to;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String taskDescription, String from, String to) {
+public class Event extends Task{
+    protected LocalDateTime from;
+    protected LocalDateTime to;
+
+    public Event(String taskDescription, LocalDateTime from, LocalDateTime to) {
         super(taskDescription);
         this.from = from;
         this.to = to;

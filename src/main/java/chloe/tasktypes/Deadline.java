@@ -1,9 +1,11 @@
 package chloe.tasktypes;
 
-public class Deadline extends Task {
-    protected String dueDate;
+import java.time.LocalDateTime;
 
-    public Deadline(String taskDescription, String dueDate) {
+public class Deadline extends Task {
+    protected LocalDateTime dueDate;
+
+    public Deadline(String taskDescription, LocalDateTime dueDate) {
         super(taskDescription);
         this.dueDate = dueDate;
     }
@@ -23,16 +25,17 @@ public class Deadline extends Task {
     }
 
     public String getDueDate() {
-        return dueDate;
+        return parseDateTimeToString(dueDate);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + dueDate + ")";
+        return super.toString() + " (by: " + parseDateTimeToString(dueDate) + ")";
     }
 
     @Override
     public String toFileString() {
-        return "D # " + (isDone ? "1" : "0") + " # " + taskDescription + " # " + dueDate;
+        return "D # " + (isDone ? "1" : "0") + " # "
+                + taskDescription + " # " + parseDateTimeToString(dueDate);
     }
 }

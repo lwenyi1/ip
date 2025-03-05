@@ -4,9 +4,8 @@ Tasks loaded successfully from: C:\Users\liuwe\Documents\CS2113 projects\ip\text
 	How can I help you today?
 	**********************************************
 	**********************************************
-	you have 2 things in your list:
-	[ ][D]1. hey (by: today)
-	[ ][E]2. hello (from: today to: tmr)
+	you have 1 things in your list:
+	[ ][D]1. hey (by: 20-02-2025 00:00)
 	**********************************************
 	**********************************************
 	OK bye!

@@ -21,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 public class Storage {
     private static final String DIRECTORY;
     private static final String FILE_NAME;
+    private static final String TASK_SPLITTER = " # ";
 
     // Set up the variables needed for the file operations
     static {
@@ -35,7 +36,7 @@ public class Storage {
      * Checks for the existence of the text file and
      * creates it if not found.
      */
-    public static void loadSavedTasks(List<Task> taskList) {
+    public static void loadSavedTasks(TaskList taskList) {
         File directory = new File(DIRECTORY);
         File file = new File(FILE_NAME);
 
@@ -60,26 +61,7 @@ public class Storage {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" # "); // Use # to split task components
-                if (parts.length < 3) continue; // Skip lousy lines which are missing data
-
-                String type = parts[0];
-                boolean isDone = parts[1].equals("1");
-                String description = parts[2];
-
-                Task task;
-                if (type.equals("T")) {
-                    task = new Task(description);
-                } else if (type.equals("D") && parts.length == 4) {
-                    task = new Deadline(description, parts[3]);
-                } else if (type.equals("E") && parts.length == 5) {
-                    task = new Event(description, parts[3], parts[4]);
-                } else {
-                    continue; // Skip lousy lines with wrong data
-                }
-
-                task.updateStatus(isDone); // Mark tasks which were previously marked
-                taskList.add(task); // Add to task list
+                parseTaskLine(line, taskList);
             }
             System.out.println("Tasks loaded successfully from: " + FILE_NAME);
         } catch (IOException e) {
@@ -88,12 +70,37 @@ public class Storage {
         }
     }
 
+    private static void parseTaskLine(String line, TaskList taskList) {
+        String[] parts = line.split(TASK_SPLITTER);
+        if (parts.length < 3) return;
+
+        String type = parts[0];
+        boolean isDone = parts[1].equals("1");
+        String description = parts[2];
+
+        Task task;
+        if (type.equals("T")) {
+            task = new Task(description);
+        } else if (type.equals("D") && parts.length == 4) {
+            task = new Deadline(description, parts[3]);
+        } else if (type.equals("E") && parts.length == 5) {
+            task = new Event(description, parts[3], parts[4]);
+        } else {
+            System.out.println("Unknown task type encountered: " + type);
+            System.out.println("Skipping line...");
+            return;
+        }
+
+        task.updateStatus(isDone);
+        taskList.addTask(task);
+    }
+
     /**
      * Updates the save file with the new task list.
      * Rewrites the file each time. Maybe will optimise
      * this at some point when I have time :""
      */
-    public void updateSaveFile(List<Task> taskList) {
+    public static void updateSaveFile(List<Task> taskList) {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Task task : taskList) {

@@ -10,18 +10,12 @@ import chloe.tasktypes.Task;
 import chloe.tasktypes.Deadline;
 import chloe.tasktypes.Event;
 
-public class TaskManager {
+public class Parser {
     private static final String LINE = "\t**********************************************";
-    private static List<Task> taskList = new ArrayList<>(); // List of tasks
-    Storage storage = new Storage();
+    TaskList taskList;
 
-
-    /**
-     * Constructor for the TaskManager class.
-     * Loads saved tasks from the save file to the task list
-     * upon start up.
-     * */
-    public TaskManager() {
+    public Parser() {
+        taskList = new TaskList();
         Storage.loadSavedTasks(taskList);
     }
 
@@ -66,7 +60,8 @@ public class TaskManager {
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             handleBadIndex();
         }
-        storage.updateSaveFile(taskList); // Update file after every command
+        List<Task> taskListToSave = taskList.getTaskList();
+        Storage.updateSaveFile(taskListToSave); // Update file after every command
 
         return true;
     }
@@ -85,7 +80,7 @@ public class TaskManager {
     /**
      * Prints message asking user for valid task index.
      */
-    public static void handleBadIndex() {
+    public void handleBadIndex() {
         System.out.println(LINE);
         if (taskList.isEmpty()) {
             System.out.println("\tAdd a task first, then");
@@ -106,7 +101,7 @@ public class TaskManager {
     /**
      * Reads in task from the user and adds it to the task list.
      * */
-    public static void addTodo(String task) throws IncompleteCommandException {
+    public void addTodo(String task) throws IncompleteCommandException {
         // Adds task to the list
         if (task.isEmpty()) {
             throw new IncompleteCommandException("Please use the format: todo <description>");
@@ -114,13 +109,13 @@ public class TaskManager {
 
         Task newTask = new Task(task);
         newTask.printTaskAddition();
-        taskList.add(newTask);
+        taskList.addTask(newTask);
     }
 
     /**
      * Reads in deadline from the user and adds it to the task list.
      * */
-    public static void addDeadline(String task) throws IncompleteCommandException {
+    public void addDeadline(String task) throws IncompleteCommandException {
         // Split task name and due date
         String[] stringParts = task.split(" /by ", 2);
         String taskDescription = stringParts[0];
@@ -133,13 +128,13 @@ public class TaskManager {
         // Adds deadline to the list
         Deadline newDeadline = new Deadline(taskDescription, dueDate);
         newDeadline.printTaskAddition();
-        taskList.add(newDeadline);
+        taskList.addTask(newDeadline);
     }
 
     /**
      * Reads in event from the user and adds it to the task list.
      * */
-    public static void addEvent(String task) throws IncompleteCommandException {
+    public void addEvent(String task) throws IncompleteCommandException {
         // Split task name and due date
         String[] stringParts = task.split(" /from ", 2);
         String taskDescription = stringParts[0];
@@ -156,18 +151,18 @@ public class TaskManager {
         // Adds event to the list
         Event newEvent = new Event(taskDescription, from, to);
         newEvent.printTaskAddition();
-        taskList.add(newEvent);
+        taskList.addTask(newEvent);
     }
 
     /**
      * Lists the tasks stored thus far.
      * Prints out the tasks line by line.
      * */
-    public static void listTasks() {
+    public void listTasks() {
         System.out.println(LINE);
-        System.out.println("\tyou have " + taskList.size() + " things in your list:");
-        for(int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
+        System.out.println("\tyou have " + taskList.getListSize() + " things in your list:");
+        for(int i = 0; i < taskList.getListSize(); i++) {
+            Task task = taskList.getTask(i);
             System.out.println("\t"+task.getStatusIcon() + task.getTaskType()
                     +(i+1)+". " + task.toString());
         }
@@ -177,11 +172,11 @@ public class TaskManager {
     /**
      * Marks or unmarks the task specified.
      */
-    public static void handleTaskMarking(String markOrUnmark, String[] stringParts) {
+    public void handleTaskMarking(String markOrUnmark, String[] stringParts) {
         boolean commandIsMark = markOrUnmark.equals("mark");
 
         int taskId = Integer.parseInt(stringParts[1])-1;
-        Task task = taskList.get(taskId);
+        Task task = taskList.getTask(taskId);
         task.updateStatus(commandIsMark);
 
         System.out.println(LINE);
@@ -200,10 +195,9 @@ public class TaskManager {
     /**
      * Deletes the specified task
      * */
-    public static void deleteTask(String[] stringParts) {
+    public void deleteTask(String[] stringParts) {
         int taskId = Integer.parseInt(stringParts[1])-1;
-        Task task = taskList.get(taskId);
-        taskList.remove(taskId);
+        Task task = taskList.removeTask(taskId);
 
         System.out.println(LINE);
         System.out.println("\tOk! Deleting this task:");

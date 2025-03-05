@@ -13,6 +13,7 @@ list
 mark 0
 mark 1
 unmark 1
+find hello
 delete
 delete 1
 list

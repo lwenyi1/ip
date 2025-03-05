@@ -1,5 +1,11 @@
 package chloe.tasktypes;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import chloe.exceptions.IncompleteCommandException;
+
 /**
  * The {@code Task} class represents a task in chloe.
  * 
@@ -87,5 +93,12 @@ public class Task {
      */
     public String toFileString() {
         return "T # " + (isDone ? "1" : "0") + " # " + taskDescription;
+    }
+
+
+
+    protected String parseDateTimeToString(LocalDateTime dateTime) {
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return dateTime.format(outputFormatter);
     }
 }

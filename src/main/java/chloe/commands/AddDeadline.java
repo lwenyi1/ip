@@ -1,5 +1,8 @@
 package chloe.commands;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import chloe.TaskList;
 import chloe.exceptions.IncompleteCommandException;
 import chloe.tasktypes.Deadline;
@@ -22,13 +25,20 @@ public class AddDeadline extends CommandHandler{
         String[] stringParts = taskDetails.split(" /by ", 2);
         String taskDescription = stringParts[0];
         String dueDate = stringParts.length > 1? stringParts[1] : "";
+        LocalDateTime parsedDueDate;
 
         if (taskDescription.isEmpty() || dueDate.isEmpty()) {
             throw new IncompleteCommandException("Please use the format: deadline <description> /by <due date>");
         }
 
+        try {
+            parsedDueDate = parseStringToDateTime(dueDate);
+        } catch (DateTimeParseException e) {
+            throw new IncompleteCommandException("Please date and time in the format dd/MM/yyyy HH:mm");
+        }
+
         // Adds deadline to the list
-        Deadline newDeadline = new Deadline(taskDescription, dueDate);
+        Deadline newDeadline = new Deadline(taskDescription, parsedDueDate);
         newDeadline.printTaskAddition();
         taskList.addTask(newDeadline);
     }

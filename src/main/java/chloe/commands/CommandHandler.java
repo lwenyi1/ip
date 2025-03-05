@@ -1,5 +1,9 @@
 package chloe.commands;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import chloe.TaskList;
 import chloe.exceptions.IncompleteCommandException;
 
@@ -23,5 +27,10 @@ public class CommandHandler {
 
     public void execute() throws IncompleteCommandException {
 
+    }
+
+    protected LocalDateTime parseStringToDateTime(String dateTimeString) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return LocalDateTime.parse(dateTimeString, inputFormatter);
     }
 }

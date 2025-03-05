@@ -4,15 +4,16 @@ todo
 todo hi
 deadline
 deadline hey
-deadline hey /by today
+deadline hey /by 20/02/2025 00:00
 event
 event hello
-event hello /from today
-event hello /from today /to tmr
+event hello /from 20/02/2025 00:00
+event hello /from 20/02/2025 /to 21/02/2025 00:00
 list
 mark 0
 mark 1
 unmark 1
+find hello
 delete
 delete 1
 list

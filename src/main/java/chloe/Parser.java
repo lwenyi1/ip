@@ -1,7 +1,4 @@
 package chloe;
-// For collections
-import java.util.ArrayList;
-import java.util.List;
 
 // For chloe task management
 import chloe.commands.CommandHandler;
@@ -9,6 +6,7 @@ import chloe.commands.AddDeadline;
 import chloe.commands.AddEvent;
 import chloe.commands.AddTodo;
 import chloe.commands.DeleteTask;
+import chloe.commands.FindTask;
 import chloe.commands.ListTasks;
 import chloe.commands.MarkCommand;
 import chloe.exceptions.IllegalCommandException;
@@ -53,6 +51,7 @@ public class Parser {
             case "deadline" -> new AddDeadline(taskDetails, taskList);
             case "event" -> new AddEvent(taskDetails, taskList);
             case "mark", "unmark" -> new MarkCommand(userCommand.toLowerCase(), stringParts, taskDetails, taskList);
+            case "find" -> new FindTask(taskDetails, taskList);
             case "delete" -> new DeleteTask(stringParts, taskDetails, taskList);
             default -> throw new IllegalCommandException(ILLEGAL_COMMAND_MESSAGE);
         };

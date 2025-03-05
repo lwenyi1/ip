@@ -1,5 +1,7 @@
 package chloe.tasktypes;
 
+import java.time.LocalDateTime;
+
 /**
  * The {@code Deadline} class represents a deadline task in chloe.
  * 
@@ -7,10 +9,11 @@ package chloe.tasktypes;
  * @version 1.0
  * @since 2025-02-15
  */
-public class Deadline extends Task {
-    protected String dueDate;
 
-    public Deadline(String taskDescription, String dueDate) {
+public class Deadline extends Task {
+    protected LocalDateTime dueDate;
+
+    public Deadline(String taskDescription, LocalDateTime dueDate) {
         super(taskDescription);
         this.dueDate = dueDate;
     }
@@ -47,7 +50,7 @@ public class Deadline extends Task {
      * @return The due date as a string.
      */
     public String getDueDate() {
-        return dueDate;
+        return parseDateTimeToString(dueDate);
     }
 
     /**
@@ -58,7 +61,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (by: " + dueDate + ")";
+        return super.toString() + " (by: " + parseDateTimeToString(dueDate) + ")";
     }
 
     /**
@@ -73,6 +76,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileString() {
-        return "D # " + (isDone ? "1" : "0") + " # " + taskDescription + " # " + dueDate;
+        return "D # " + (isDone ? "1" : "0") + " # "
+                + taskDescription + " # " + parseDateTimeToString(dueDate);
     }
 }

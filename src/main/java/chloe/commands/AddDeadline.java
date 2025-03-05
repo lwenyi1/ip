@@ -7,6 +7,13 @@ import chloe.TaskList;
 import chloe.exceptions.IncompleteCommandException;
 import chloe.tasktypes.Deadline;
 
+/**
+ * The {@code AddDeadline} class is responsible for adding a deadline task to the task list.
+ * 
+ * @author Wenyi
+ * @version 1.0
+ * @since 2025-03-06
+ */
 public class AddDeadline extends CommandHandler{
     public AddDeadline(String taskDetails, TaskList taskList) {
         super(taskDetails, taskList);

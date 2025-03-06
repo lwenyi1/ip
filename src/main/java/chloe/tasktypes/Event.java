@@ -54,7 +54,8 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        return super.toString() + " (from: " + parseDateTimeToString(this.from)
+                + " to: " + parseDateTimeToString(this.to) + ")";
     }
 
     /**
@@ -71,6 +72,7 @@ public class Event extends Task{
      */
     @Override
     public String toFileString() {
-        return "E # " + (isDone ? "1" : "0") + " # " + taskDescription + " # " + from + " # " + to;
+        return "E # " + (isDone ? "1" : "0") + " # " + taskDescription
+                + " # " + parseDateTimeToString(from) + " # " + parseDateTimeToString(to);
     }
 }

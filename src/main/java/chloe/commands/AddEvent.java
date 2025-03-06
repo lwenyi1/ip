@@ -52,7 +52,7 @@ public class AddEvent extends CommandHandler{
             parsedStartDate = parseStringToDateTime(from);
             parsedEndDate = parseStringToDateTime(to);
         } catch (DateTimeParseException e) {
-            throw new IncompleteCommandException("Please date and time in the format dd/MM/yyyy HH:mm");
+            throw new IncompleteCommandException("Please enter date and time in the format dd/MM/yyyy HH:mm");
         }
 
         // Adds event to the list

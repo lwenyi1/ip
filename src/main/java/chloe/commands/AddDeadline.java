@@ -34,7 +34,7 @@ public class AddDeadline extends CommandHandler{
         try {
             parsedDueDate = parseStringToDateTime(dueDate);
         } catch (DateTimeParseException e) {
-            throw new IncompleteCommandException("Please date and time in the format dd/MM/yyyy HH:mm");
+            throw new IncompleteCommandException("Please enter date and time in the format dd/MM/yyyy HH:mm");
         }
 
         // Adds deadline to the list

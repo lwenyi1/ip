@@ -35,7 +35,7 @@ Tasks loaded successfully from: C:\Users\liuwe\Documents\CS2113 projects\ip\text
 	Please use the format: event <description> /from <date/time> /to <end date/time>
 	**********************************************
 	**********************************************
-	Please date and time in the format dd/MM/yyyy HH:mm
+	Please enter date and time in the format dd/MM/yyyy HH:mm
 	**********************************************
 	**********************************************
 	you have 2 things in your list:
@@ -54,8 +54,7 @@ Tasks loaded successfully from: C:\Users\liuwe\Documents\CS2113 projects\ip\text
 	[ ][T]1. hi
 	**********************************************
 	**********************************************
-	Located 1 matching things in your list:
-	[ ][E]1. hello (from: today to: tmr)
+	Located 0 matching things in your list:
 	**********************************************
 	**********************************************
 	Enter a valid task index

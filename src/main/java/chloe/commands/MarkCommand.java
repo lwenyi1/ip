@@ -20,11 +20,11 @@ public class MarkCommand extends CommandHandler{
         this.stringParts = stringParts;
     }
 
+    
     /**
-     * Marks or unmarks a task in the task list.
-     *
-     * This method extracts the task id from the user's input and marks or unmarks the task with the given id.
-     * It then prints out the updated task status and description.
+     * Executes the mark command. If the command is "mark", it marks the task as done.
+     * If the command is "unmark", it marks the task as not done. It then prints the
+     * task in the task list with the updated status.
      */
     @Override
     public void execute() {

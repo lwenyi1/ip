@@ -17,7 +17,7 @@ todo Buy groceries
 
 ```
 **********************************************
-Added: [ ][T] Buy groceries
+Added "Buy groceries" for you!
 **********************************************
 ```
 
@@ -35,7 +35,7 @@ deadline Submit assignment /by 20/02/2025 21:00
 
 ```
 **********************************************
-Added: [ ][D] Submit assignment (by: 20-02-2025 21:00)
+Added "Submit assignment", do it by: 20-02-2025 21:00!
 **********************************************
 ```
 
@@ -53,7 +53,7 @@ event Team meeting /from 21/02/2025 14:00 /to 21/02/2025 16:00
 
 ```
 **********************************************
-Added: [ ][E] Team meeting (from: 21-02-2025 14:00 to: 21-02-2025 16:00)
+Added "Team meeting" for you, happening on 21-02-2025 14:00 to 21-02-2025 16:00)
 **********************************************
 ```
 
@@ -128,7 +128,7 @@ list
 
 ```
 **********************************************
-You have 3 tasks in your list:
+You have 3 things in your list:
 1. [X][T] Buy groceries
 2. [ ][D] Submit assignment (by: 20-02-2025 21:00)
 3. [ ][E] Team meeting (from: 21-02-2025 14:00 to: 21-02-2025 16:00)
@@ -149,7 +149,7 @@ find groceries
 
 ```
 **********************************************
-Here are the matching tasks in your list:
+Located 1 matching things in your list:
 1. [X][T] Buy groceries
 **********************************************
 ```

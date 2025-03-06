@@ -1,8 +1,7 @@
 # Chloe User Guide
 
 ## Introduction
-
-Chloe is a simple interactive task manager that helps you keep track of your tasks, deadlines, and events efficiently.
+Chloe is an interactive task manager that helps you keep track of your tasks, deadlines, and events efficiently.
 
 ## Adding Todos
 
@@ -29,14 +28,14 @@ To add a **deadline**, use the `deadline` command followed by the task descripti
 ### Example:
 
 ```
-deadline Submit assignment /by Monday 9pm
+deadline Submit assignment /by 20/02/2025 21:00
 ```
 
 ### Expected Outcome:
 
 ```
 **********************************************
-Added: [ ][D] Submit assignment (by: Monday 9pm)
+Added: [ ][D] Submit assignment (by: 20-02-2025 21:00)
 **********************************************
 ```
 
@@ -47,14 +46,14 @@ To add an **event**, use the `event` command followed by the event description, 
 ### Example:
 
 ```
-event Team meeting /from Friday 2pm /to 4pm
+event Team meeting /from 21/02/2025 14:00 /to 21/02/2025 16:00
 ```
 
 ### Expected Outcome:
 
 ```
 **********************************************
-Added: [ ][E] Team meeting (from: Friday 2pm to: 4pm)
+Added: [ ][E] Team meeting (from: 21-02-2025 14:00 to: 21-02-2025 16:00)
 **********************************************
 ```
 
@@ -96,4 +95,62 @@ Oh "Buy groceries" is not done? Unmarked.
 **********************************************
 ```
 
+## Deleting Tasks
+
+To **delete** a task, use the `delete` command followed by the task number.
+
+### Example:
+
+```
+delete 1
+```
+
+### Expected Outcome:
+
+```
+**********************************************
+Ok! Deleting this task:
+[ ][T] Buy groceries
+**********************************************
+```
+
+## Listing All Tasks
+
+To **list** all tasks, use the `list` command.
+
+### Example:
+
+```
+list
+```
+
+### Expected Outcome:
+
+```
+**********************************************
+You have 3 tasks in your list:
+1. [X][T] Buy groceries
+2. [ ][D] Submit assignment (by: 20-02-2025 21:00)
+3. [ ][E] Team meeting (from: 21-02-2025 14:00 to: 21-02-2025 16:00)
+**********************************************
+```
+
+## Finding Tasks
+
+To **find** tasks containing a specific keyword, use the `find` command followed by the keyword.
+
+### Example:
+
+```
+find groceries
+```
+
+### Expected Outcome:
+
+```
+**********************************************
+Here are the matching tasks in your list:
+1. [X][T] Buy groceries
+**********************************************
+```
 
